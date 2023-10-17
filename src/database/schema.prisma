@@ -6,8 +6,22 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_PATH")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id         Int      @default(autoincrement()) @unique
+  uuid       String   @id @default(uuid()) @unique
+  email      String    @unique
+  name       String
+  password   String
+  accessToken String?
+  role       String?
+
+  whatsapps  Whatsapp[]
+
+  @@map("accounts")
 }
 
 model Whatsapp {
@@ -17,8 +31,11 @@ model Whatsapp {
   session        String
   remoteJid      String   @map("remote_jid")
   ownerJid       String   @map("owner_jid")
+  accountId      Int   @map("account_uuid")
   qrcode         String   @default("")
   status         String   @default("PENDING")
+
+  account        Account  @relation(fields: [accountId], references: [id])
 
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")

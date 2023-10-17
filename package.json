@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/main/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
+    "build": "rimraf dist && tsc -p tsconfig-build.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "build:watch": "rimraf dist && tsc -p tsconfig-build.json -w"
   },
   "prisma": {
     "schema": "src/database/schema.prisma"
@@ -14,10 +17,17 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.8.6",
+    "rimraf": "^5.0.5",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2",
+    "@sentry/node": "^7.74.1",
+    "@whiskeysockets/baileys": "^6.5.0",
+    "pino-pretty": "^10.2.3",
     "prisma": "^5.4.2"
   }
 }
