@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "ES2023",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "rootDirs": ["src"],
+    "strictNullChecks": true,
+    "strict": true,
+    "baseUrl": "src",
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
